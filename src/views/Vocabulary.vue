@@ -16,6 +16,9 @@ export default {
     SearchVocabulary,
     Chunk
   },
+  provide() {
+    return {findChunk: this.chunk }
+  },
   data() {
     return {
       activeSearchTerm: '',
@@ -50,10 +53,12 @@ export default {
       return filteredItems;
     }
   },
-
   methods: {
     updateSearch(val) {
       this.enteredSearchTerm = val;
+    },
+    chunk(id){
+      return this.chunks.filter(el => el.id === id)
     }
   },
   watch: {
