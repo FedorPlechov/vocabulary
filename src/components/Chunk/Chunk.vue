@@ -1,6 +1,6 @@
 <template>
   <li>
-    <router-link :to="{ name: 'DetailChunk', params:{ id: chunk.id, chunk: chunk} }">{{ chunk.title }}</router-link>
+    <router-link :to="{ name: 'DetailChunk', params:{ id: chunk.id} }">{{ chunk.title }}</router-link>
   </li>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-    <SearchVocabulary :search-term="enteredSearchTerm" @search="updateSearch"/>
+    <SearchVocabulary :search-term="enteredSearchTerm" @search="updateSearch" @add-chunk="$router.push({ name: 'CreateChunk'})"/>
     <ul>
       <Chunk v-for="chunk in availableChunks" :key="chunk.id"
              :chunk="chunk"/>
@@ -16,27 +16,10 @@ export default {
     SearchVocabulary,
     Chunk
   },
-  provide() {
-    return {findChunk: this.chunk }
-  },
   data() {
     return {
       activeSearchTerm: '',
       enteredSearchTerm: '',
-      chunks: [
-        {
-          id: "1",
-          title: "milk",
-          description: "white water",
-          example: "a bottle of milk",
-        },
-        {
-          id: "2",
-          title: "mill2",
-          description: "white water2",
-          example: "a bottle of milk2",
-        }
-      ],
       needChunks: [],
     }
   },
@@ -51,6 +34,9 @@ export default {
         filteredItems = [];
       }
       return filteredItems;
+    },
+    chunks(){
+      return this.$store.getters.chunks;
     }
   },
   methods: {

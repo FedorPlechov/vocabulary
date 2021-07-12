@@ -1,10 +1,11 @@
 <template>
-
+  <input type="text">
 </template>
 
 <script>
+
 export default {
-  name: "EditChunk"
+  name: "CreateChunk",
 }
 </script>
 
