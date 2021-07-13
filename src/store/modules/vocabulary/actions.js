@@ -50,10 +50,8 @@ export default {
             body: JSON.stringify(payload)
         });
         if (!response.ok) {
-            // handler error
+            console.log(response);
         }
-
-
     }
 };
 //     async loadCoaches(context, payload) {

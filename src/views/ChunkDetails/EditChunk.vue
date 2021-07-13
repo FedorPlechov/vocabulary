@@ -1,12 +1,12 @@
 <template>
-  <form class="edit__field">
+  <form @submit="sendEditedChunk" class="edit__field">
     <label for="title">Title</label>
-    <input id="title" v-model="editChunk.title"  name="title" type="text">
+    <input id="title" v-model="editedChunk.title" name="title" type="text">
     <label for="description">Description</label>
-    <textarea id="description" v-model="editChunk.description"  name="description" rows="4"></textarea>
+    <textarea id="description"  v-model="editedChunk.description"  name="description" rows="4"></textarea>
     <label for="example">Example</label>
-    <textarea id="example"  v-model="editChunk.example" name="example" rows="4"></textarea>
-    <a class="button15 edit__button" href="#">Send</a>
+    <textarea id="example"  v-model="editedChunk.example" name="example" rows="4"></textarea>
+    <a class="button15 edit__button" href="#" @click="sendEditedChunk">Send</a>
   </form>
 </template>
 
@@ -16,7 +16,7 @@ export default {
   props: ['chunk'],
   data() {
     return {
-      editChunk: {
+      editedChunk: {
         title: '',
         description: '',
         example: '',
@@ -28,9 +28,22 @@ export default {
       return this.chunk.idFb;
     }
   },
-  // beforeRouteUpdate(to, from, next) {
-  //
-  // }
+  mounted() {
+    this.setPlaceHolder()
+  },
+  methods:{
+    setPlaceHolder(){
+      this.editedChunk = {
+        title: this.chunk.title,
+        description: this.chunk.description,
+        example: this.chunk.example,
+        idFB: this.chunk.idFB
+      }
+    },
+    sendEditedChunk() {
+      this.$store.dispatch('vocabulary/editChunk', this.editedChunk);
+    }
+  }
 }
 </script>
 
