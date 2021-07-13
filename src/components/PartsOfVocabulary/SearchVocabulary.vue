@@ -9,7 +9,7 @@
 <script>
 export default {
   props: ['searchTerm'],
-  emits: ['search'],
+  emits: ['search','add-chunk'],
   methods: {
     search(event) {
       this.$emit('search', event.target.value);

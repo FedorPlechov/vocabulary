@@ -1,5 +1,5 @@
 <template>
-  <header><h1>MVB</h1><nav><button class="login">logIn</button></nav></header>
+  <header><router-link :to="{ name:'Vocabulary'}"><h1>MVB</h1></router-link><nav><button class="login">logIn</button></nav></header>
 </template>
 
 <script>
@@ -34,5 +34,8 @@ nav {
   border: 2px solid #439400;
   background-color: aliceblue;
   border-radius: 10px;
+}
+a {
+  text-decoration-color: #439400;
 }
 </style>

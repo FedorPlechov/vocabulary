@@ -23,7 +23,7 @@ export default {
   props: ['id'],
   computed: {
     chunk() {
-      return this.$store.getters.chunks.find(el => el.id === this.id)
+      return this.$store.getters['vocabulary/chunks'].find(el => el.id === this.id)
     }
   }
 }
