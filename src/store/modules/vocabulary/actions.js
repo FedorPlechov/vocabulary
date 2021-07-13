@@ -23,7 +23,7 @@ export default {
         }
         context.commit('createChunks', chunkData);
         context.commit('setChunkIsCreated', true);
-        setTimeout(() => context.commit('setChunkIsCreated', false),4000);
+        setTimeout(() => context.commit('setChunkIsCreated', false), 4000);
     },
     async loadChunks(context) {
         const userId = context.rootGetters.userId;
@@ -44,14 +44,23 @@ export default {
         context.commit('setChunks', chunks);
     },
     async editChunk(context, payload) {
-        const userId=context.rootGetters.userId;
-        const response = await fetch(`https://vocabulary-61407-default-rtdb.firebaseio.com/chunks/${userId}/${payload.idFB}.json`,{
+        const userId = context.rootGetters.userId;
+        const response = await fetch(`https://vocabulary-61407-default-rtdb.firebaseio.com/chunks/${userId}/${payload.idFB}.json`, {
             method: 'PUT',
             body: JSON.stringify(payload)
         });
         if (!response.ok) {
             console.log(response);
+            // context.commit('')
         }
+    },
+    async deleteChunk(context, payload) {
+        const userId = context.rootGetters.userId;
+        const response = await fetch(`https://vocabulary-61407-default-rtdb.firebaseio.com/chunks/${userId}/${payload.idFB}.json`, {
+            method: 'DELETE',
+        });
+        if (!response.ok) console.log(response);
+        context.commit('delChunk', payload.id);
     }
 };
 //     async loadCoaches(context, payload) {

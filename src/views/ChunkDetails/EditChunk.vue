@@ -37,11 +37,13 @@ export default {
         title: this.chunk.title,
         description: this.chunk.description,
         example: this.chunk.example,
-        idFB: this.chunk.idFB
+        idFB: this.chunk.idFB,
+        id:this.chunk.id
       }
     },
     sendEditedChunk() {
       this.$store.dispatch('vocabulary/editChunk', this.editedChunk);
+      this.$router.replace({name: 'Vocabulary'});
     }
   }
 }
