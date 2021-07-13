@@ -18,11 +18,10 @@ export default {
   methods: {
     handler(conf) {
       if (conf) {
-        console.log(this.chunk);
         this.$store.dispatch('vocabulary/deleteChunk', this.chunk);
-        this.$router.push({name: 'Vocabulary'})
+        this.$router.replace({name: 'Vocabulary'})
       } else {
-        this.$router.push({name: 'DetailChunk'})
+        this.$router.replace({name: 'DetailChunk'})
       }
     }
   }

@@ -5,8 +5,8 @@ export default {
     setChunks(state, payload) {
         state.chunks = payload;
     },
-    setChunkIsCreated(state, payload){
-        state.isCreated = payload
+    showPopup(state, payload){
+        state.popup = payload
     },
     editChunk(state, payload){
         const index = state.chunks.findIndex(payload);

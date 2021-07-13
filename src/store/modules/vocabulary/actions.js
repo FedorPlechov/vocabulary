@@ -22,8 +22,8 @@ export default {
             // error ...
         }
         context.commit('createChunks', chunkData);
-        context.commit('setChunkIsCreated', true);
-        setTimeout(() => context.commit('setChunkIsCreated', false), 4000);
+        context.commit('showPopup', "Chunk was created!");
+        setTimeout(() => context.commit('showPopup', false), 4000);
     },
     async loadChunks(context) {
         const userId = context.rootGetters.userId;
@@ -42,6 +42,8 @@ export default {
             chunks.push(chunk);
         }
         context.commit('setChunks', chunks);
+        context.commit('showPopup', "Chunks was loaded!");
+        setTimeout(() => context.commit('showPopup', false), 4000);
     },
     async editChunk(context, payload) {
         const userId = context.rootGetters.userId;
@@ -53,6 +55,8 @@ export default {
             console.log(response);
             // context.commit('')
         }
+        context.commit('showPopup', "Chunk was edited!");
+        setTimeout(() => context.commit('showPopup', false), 4000);
     },
     async deleteChunk(context, payload) {
         const userId = context.rootGetters.userId;
@@ -61,6 +65,8 @@ export default {
         });
         if (!response.ok) console.log(response);
         context.commit('delChunk', payload.id);
+        context.commit('showPopup', "Chunk was deleted!");
+        setTimeout(() => context.commit('showPopup', false), 4000);
     }
 };
 //     async loadCoaches(context, payload) {

@@ -1,5 +1,5 @@
 <template>
-  <span v-if="isCreated" class="popup">Chunk was created!</span>
+  <span v-if="popup" class="popup">{{ popup }}</span>
   <SearchVocabulary :search-term="enteredSearchTerm" @search="updateSearch"
                     @add-chunk="$router.push({ name: 'CreateChunk'})"/>
   <ul>
@@ -26,8 +26,8 @@ export default {
     }
   },
   computed: {
-    isCreated() {
-      return this.$store.getters['vocabulary/chunkIsCreated'];
+    popup() {
+      return this.$store.getters['vocabulary/popup'];
     },
     availableChunks() {
       let filteredItems = [];
@@ -79,7 +79,7 @@ ul {
 
 .popup {
   position: absolute;
-  animation: pop-up 2s ease-out ;
+  animation: pop-up 5s ease-out ;
   color: #8bb804;
   top: 21vh;
   left: 30vw;
@@ -90,9 +90,13 @@ ul {
     transform: translateY(-20px);
     opacity: 0;
   }
-  to {
+  50% {
     transform: translateY(0);
     opacity: 1;
+  }
+  100% {
+    transform: translateY(-20px);
+    opacity: 0;
   }
 }
 </style>

@@ -7,7 +7,7 @@ export default {
     state(){
        return {
            chunks: null,
-           isCreated: false
+           popup: false
        }
     },
     getters,
