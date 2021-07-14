@@ -2,7 +2,12 @@
   <span v-if="popup" class="popup">{{ popup }}</span>
   <SearchVocabulary :search-term="enteredSearchTerm" @search="updateSearch"
                     @add-chunk="$router.push({ name: 'CreateChunk'})"/>
+  <pulse-loader class="loader" :loading="loading" size="15px"></pulse-loader>
   <ul>
+    <li class="show" v-if="emptyChunks">You haven't got any chunks yet.Please press [ + ] to add one.</li>
+    <li class="show" v-if="!enteredSearchTerm && !loading">You can start to write chunk in search or look all your <a class="button15" href="#">chunks</a>(isn't
+      working yet)
+    </li>
     <Chunk v-for="chunk in availableChunks" :key="chunk.id"
            :chunk="chunk"/>
   </ul>
@@ -11,18 +16,22 @@
 <script>
 import SearchVocabulary from "@/components/PartsOfVocabulary/SearchVocabulary";
 import Chunk from "@/components/Chunk/Chunk";
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 
 export default {
   name: "Vocabulary",
   components: {
     SearchVocabulary,
-    Chunk
+    Chunk,
+    PulseLoader
   },
   data() {
     return {
       activeSearchTerm: '',
       enteredSearchTerm: '',
       needChunks: [],
+      emptyChunks: false,
+      loading: false,
     }
   },
   computed: {
@@ -50,6 +59,16 @@ export default {
     },
     chunk(id) {
       return this.chunks.filter(el => el.id === id)
+    },
+    async loadChunks(refresh = false) {
+      this.loading = true;
+      await this.$store.dispatch('vocabulary/loadChunks', {
+        forceRefresh: refresh,
+      });
+      setTimeout(() => {this.loading = false} , 2000);
+      if (this.chunks === null) {
+        this.emptyChunks = true;
+      }
     }
   },
   watch: {
@@ -63,7 +82,7 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch('vocabulary/loadChunks');
+    this.loadChunks()
   }
 }
 </script>
@@ -79,10 +98,22 @@ ul {
 
 .popup {
   position: absolute;
-  animation: pop-up 5s ease-out ;
+  animation: pop-up 5s ease-out;
   color: #8bb804;
   top: 21vh;
   left: 30vw;
+}
+.loader {
+  position: relative;
+  left: 2rem;
+  top: -1rem;
+
+}
+li.show {
+  padding: 1rem 2rem;
+  color: darkgreen;
+  box-shadow: 1px 1px 1px 2px darkgreen;
+  animation: opacity 3s ease-out;
 }
 
 @keyframes pop-up {
@@ -97,6 +128,15 @@ ul {
   100% {
     transform: translateY(-20px);
     opacity: 0;
+  }
+}
+@keyframes opacity {
+  from {
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
   }
 }
 </style>

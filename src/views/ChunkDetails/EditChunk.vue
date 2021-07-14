@@ -65,4 +65,20 @@ export default {
 textarea, input {
   border-radius: 10px;
 }
+input,textarea {
+  font-size: large;
+  height: 2.5rem;
+  border: 1px solid #b1eeb1;
+  border-radius: 10px;
+  color: darkgreen;
+}
+textarea {
+  height: 5.5rem;
+}
+
+input:focus,textarea {
+  outline: none;
+  border-color: #8bb804;
+  background-color: rgba(146, 231, 147, 0.66);
+}
 </style>

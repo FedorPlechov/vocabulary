@@ -7,7 +7,8 @@ export default {
     state(){
        return {
            chunks: null,
-           popup: false
+           popup: false,
+           lastFetch: null,
        }
     },
     getters,

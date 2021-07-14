@@ -14,6 +14,9 @@ export default {
     },
     delChunk(state,payload){
         state.chunks = state.chunks.filter(el => el.id !== payload);
+    },
+    setFetchTimestamp(state) {
+        state.lastFetch = new Date().getTime();
     }
     // setFetchTimestamp(state) {
     //     state.lastFetch = new Date().getTime();

@@ -15,10 +15,10 @@ export default {
     },
     async auth(context, payload) {
         const mode = payload.mode;
-        let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDn4HVnYSnNAJ4RXDlisnK6S_GPADp1IyI';
+        let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDuxzxgZwZTjLuPohJd8Y0mOltBeuwG49E';
 
         if (mode === 'signup') {
-            url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDn4HVnYSnNAJ4RXDlisnK6S_GPADp1IyI';
+            url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDuxzxgZwZTjLuPohJd8Y0mOltBeuwG49E';
         }
         const response = await fetch(url, {
             method: 'POST',

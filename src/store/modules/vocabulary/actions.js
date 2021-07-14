@@ -25,7 +25,10 @@ export default {
         context.commit('showPopup', "Chunk was created!");
         setTimeout(() => context.commit('showPopup', false), 4000);
     },
-    async loadChunks(context) {
+    async loadChunks(context, payload) {
+        if (!payload.forceRefresh && !context.getters.shouldUpdate) {
+            return;
+        }
         const userId = context.rootGetters.userId;
         const response = await fetch(`https://vocabulary-61407-default-rtdb.firebaseio.com/chunks/${userId}.json`);
         const responseData = await response.json();
@@ -43,6 +46,7 @@ export default {
         }
         context.commit('setChunks', chunks);
         context.commit('showPopup', "Chunks was loaded!");
+        context.commit('setFetchTimestamp');
         setTimeout(() => context.commit('showPopup', false), 4000);
     },
     async editChunk(context, payload) {
