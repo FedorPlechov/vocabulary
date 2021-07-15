@@ -36,6 +36,7 @@ export default {
   computed: {
     },
   methods: {
+
     setLog(event, payload) {
       this.mode = payload
     },

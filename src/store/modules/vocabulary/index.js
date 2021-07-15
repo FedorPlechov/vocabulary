@@ -6,7 +6,7 @@ export default {
     namespaced: true,
     state(){
        return {
-           chunks: null,
+           chunks: [],
            popup: false,
            lastFetch: null,
        }

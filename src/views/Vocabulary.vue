@@ -4,7 +4,7 @@
                     @add-chunk="$router.push({ name: 'CreateChunk'})"/>
   <pulse-loader class="loader" :loading="loading" size="15px"></pulse-loader>
   <ul>
-    <li class="show" v-if="emptyChunks">You haven't got any chunks yet.Please press [ + ] to add one.</li>
+    <li class="show" v-if="!chunks.length">You haven't got any chunks yet.Please press [ + ] to add one.</li>
     <li class="show" v-if="!enteredSearchTerm && !loading">You can start to write chunk in search or look all your <a class="button15" href="#">chunks</a>(isn't
       working yet)
     </li>
@@ -30,7 +30,6 @@ export default {
       activeSearchTerm: '',
       enteredSearchTerm: '',
       needChunks: [],
-      emptyChunks: false,
       loading: false,
     }
   },
@@ -66,9 +65,6 @@ export default {
         forceRefresh: refresh,
       });
       setTimeout(() => {this.loading = false} , 2000);
-      if (this.chunks === null) {
-        this.emptyChunks = true;
-      }
     }
   },
   watch: {
