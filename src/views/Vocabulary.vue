@@ -11,6 +11,7 @@
     <Chunk v-for="chunk in availableChunks" :key="chunk.id"
            :chunk="chunk"/>
   </ul>
+  <router-view></router-view>
 </template>
 
 <script>

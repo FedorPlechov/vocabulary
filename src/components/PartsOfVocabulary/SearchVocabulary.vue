@@ -1,6 +1,6 @@
 <template>
   <div class="search">
-    <input :value="searchTerm" placeholder="Filter items" type="search" @input="search"/><a class="button15 search"
+    <input :value="searchTerm" placeholder="Find chunk" type="search" @input="search"/><a class="button15 search"
                                                                                             href="#"
                                                                                             @click="addChunk">+</a>
   </div>
