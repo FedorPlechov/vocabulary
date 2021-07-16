@@ -2,29 +2,31 @@
   <span v-if="popup" class="popup">{{ popup }}</span>
   <SearchVocabulary :search-term="enteredSearchTerm" @search="updateSearch"
                     @add-chunk="$router.push({ name: 'CreateChunk'})"/>
-  <pulse-loader class="loader" :loading="loading" size="15px"></pulse-loader>
+  <pulse-loader :loading="loading" class="loader" size="15px"></pulse-loader>
   <ul>
-    <li class="show" v-if="!chunks.length">You haven't got any chunks yet.Please press [ + ] to add one.</li>
-    <li class="show" v-if="!enteredSearchTerm && !loading">You can start to write chunk in search or look all your <a class="button15" href="#">chunks</a>(isn't
-      working yet)
+    <li v-if="!chunks.length" class="show">You haven't got any chunks yet.Please press [ + ] to add one.</li>
+    <li v-if="!enteredSearchTerm && !loading" class="show">You can start to write chunk in search or look at all your <a
+        class="button15" href="#" @click="toggleShowAllChunks">chunks</a>
     </li>
     <Chunk v-for="chunk in availableChunks" :key="chunk.id"
            :chunk="chunk"/>
   </ul>
-  <router-view></router-view>
+  <all-chunks v-if="showAllChunks && !enteredSearchTerm"></all-chunks>
 </template>
 
 <script>
 import SearchVocabulary from "@/components/PartsOfVocabulary/SearchVocabulary";
 import Chunk from "@/components/Chunk/Chunk";
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
+import VocabularyAllChunks from "@/components/PartsOfVocabulary/VocabularyAllChunks";
 
 export default {
   name: "Vocabulary",
   components: {
     SearchVocabulary,
     Chunk,
-    PulseLoader
+    PulseLoader,
+    AllChunks: VocabularyAllChunks
   },
   data() {
     return {
@@ -32,6 +34,7 @@ export default {
       enteredSearchTerm: '',
       needChunks: [],
       loading: false,
+      showAllChunks: false,
     }
   },
   computed: {
@@ -54,6 +57,9 @@ export default {
     }
   },
   methods: {
+    toggleShowAllChunks() {
+      this.showAllChunks = true;
+    },
     updateSearch(val) {
       this.enteredSearchTerm = val;
     },
@@ -65,7 +71,9 @@ export default {
       await this.$store.dispatch('vocabulary/loadChunks', {
         forceRefresh: refresh,
       });
-      setTimeout(() => {this.loading = false} , 2000);
+      setTimeout(() => {
+        this.loading = false
+      }, 2000);
     }
   },
   watch: {
@@ -100,17 +108,22 @@ ul {
   top: 21vh;
   left: 30vw;
 }
+
 .loader {
   position: relative;
   left: 2rem;
   top: -1rem;
 
 }
+
 li.show {
   padding: 1rem 2rem;
   color: darkgreen;
   box-shadow: 1px 1px 1px 2px darkgreen;
   animation: opacity 3s ease-out;
+}
+.show a {
+  color: #439400;
 }
 
 @keyframes pop-up {
@@ -127,6 +140,7 @@ li.show {
     opacity: 0;
   }
 }
+
 @keyframes opacity {
   from {
     opacity: 0;

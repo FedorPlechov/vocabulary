@@ -45,7 +45,7 @@ export default {
             chunks.push(chunk);
         }
         context.commit('setChunks', chunks);
-        context.commit('showPopup', "Chunks was loaded!");
+        context.commit('showPopup', "Chunks were loaded!");
         context.commit('setFetchTimestamp');
         setTimeout(() => context.commit('showPopup', false), 4000);
     },
