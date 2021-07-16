@@ -21,7 +21,7 @@ export default {
         this.$store.dispatch('vocabulary/deleteChunk', this.chunk);
         this.$router.replace({name: 'Vocabulary'})
       } else {
-        this.$router.replace({name: 'DetailChunk'})
+        this.$router.replace({name: 'img'})
       }
     }
   }

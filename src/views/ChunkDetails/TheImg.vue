@@ -5,7 +5,7 @@
 <script>
 export default {
   name: "TheImg",
-  props:['chunk']
+  props:['chunk'],
 }
 </script>
 

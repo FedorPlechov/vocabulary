@@ -12,7 +12,7 @@
       </div>
     </div>
     <div>
-      <router-view :chunk="chunk"></router-view>
+      <router-view :chunk="chunk "></router-view>
     </div>
   </div>
 </template>
